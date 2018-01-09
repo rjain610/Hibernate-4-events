@@ -21,11 +21,6 @@ public class HibernateMain {
 	 
 		
 		
-		/*Vehicles vehicle = new Vehicles("yamaha", null);
-		UserDetails ud = new UserDetails("Rass", null);*/
-		
-		
-	
 		SessionFactory session = HibernateUtil.getSessionFactory();
 		
 		Session sess =session.openSession();
@@ -40,6 +35,7 @@ public class HibernateMain {
 		  tx = sess.beginTransaction();
 		  ud = (UserDetails) sess.load(UserDetails.class, id);
 		  ud.setUserName("@");
+		  sess.update(ud);
 		  tx.commit();
 		  sess.close();
 		  session.close();

@@ -20,10 +20,10 @@ public class EventListenerIntegrator implements Integrator	 {
 	public void integrate(Configuration arg0, SessionFactoryImplementor arg1, SessionFactoryServiceRegistry arg2) {
 		EventListenerRegistry eventListenerRegistry = 
 				arg2.getService(EventListenerRegistry.class);
-		SaveOrUpdateEventListenerImpl ls = new SaveOrUpdateEventListenerImpl();
-	   //   eventListenerRegistry.appendListeners(EventType.SAVE_UPDATE ,ls);
+		MyEventListener ls = new MyEventListener();
 	      eventListenerRegistry.appendListeners(EventType.PRE_UPDATE, ls );
           eventListenerRegistry.appendListeners(EventType.POST_UPDATE, ls );
+          eventListenerRegistry.appendListeners(EventType.SAVE_UPDATE, ls );
       
 		
 	}

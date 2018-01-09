@@ -9,7 +9,8 @@ import org.hibernate.event.spi.SaveOrUpdateEvent;
 import org.hibernate.event.spi.SaveOrUpdateEventListener;
 import org.hibernate.persister.entity.EntityPersister;
 
-public class SaveOrUpdateEventListenerImpl implements PostUpdateEventListener  ,PreUpdateEventListener{
+
+public class MyEventListener implements PostUpdateEventListener  ,PreUpdateEventListener , SaveOrUpdateEventListener{
 
 	/**
 	 * 
@@ -18,20 +19,29 @@ public class SaveOrUpdateEventListenerImpl implements PostUpdateEventListener  ,
 
 	@Override
 	public void onPostUpdate(PostUpdateEvent arg0) {
-		System.out.println("Hell");
+		UserDetails ud = (UserDetails) arg0.getEntity();
+		System.out.println("Post update " + ud.toString());
 		
 	}
 
 	@Override
 	public boolean requiresPostCommitHanding(EntityPersister arg0) {
-		System.out.println("Yeag");
 		return false;
 	}
 
 	@Override
 	public boolean onPreUpdate(PreUpdateEvent arg0) {
-		System.out.println("Pre");
+		UserDetails ud = (UserDetails) arg0.getEntity();
+		System.out.println("Pre Update " + ud.toString());
 		return false;
+	}
+
+	@Override
+	public void onSaveOrUpdate(SaveOrUpdateEvent arg0) throws HibernateException {
+		UserDetails ud = (UserDetails) arg0.getEntity();
+		System.out.println("Save " +  ud.toString());
+			
+		
 	}
 
 	
